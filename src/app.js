@@ -5,6 +5,7 @@ const geocode = require('./utils/geocode')
 
 // Define Paths for Express config
 const app = express()
+const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
@@ -39,10 +40,7 @@ app.get('/weather', (req, res) => {
 
         res.send(current)
     })
-    // All query string key/value pairs are on req.query
-    // return res.render('weather', {
-    //     message: 'You provided "' +req.query.address + '" as the address."'
-    // })
+
 })
 
 app.get('/help', (req, res) => {
@@ -59,14 +57,6 @@ app.get('/about', (req, res) => {
     })
 })
 
-// app.get('/weather', (req, res) => {
-//     // Provide an object to send as JSON
-//     res.send({
-//         forecast: 'It is snowing',
-//         location: 'Philadelphia'
-//     })
-// })
-
 app.get('*', (req, res) => {
     res.render('404', {
         title: 'My 404 page',
@@ -75,6 +65,6 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.')
+app.listen(port, () => {
+    console.log('Server is up on port ' + port)
 })
